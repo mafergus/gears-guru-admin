@@ -14,3 +14,19 @@ export const secondary = {
   700: "#390000",
   900: "#1C0000",
 };
+
+export const text = {
+  primary: {
+    light: "white",
+    dark: "rgba(0, 0, 0, 0.87)",
+  },
+  secondary: {
+    dark: "rgba(0, 0, 0, 0.54)",
+  },
+  tertiary: {
+    dark: "rgba(0, 0, 0, 0.38)",
+  },
+  quartinary: {
+    dark: "rgba(0, 0, 0, 0.12)",
+  }
+};
