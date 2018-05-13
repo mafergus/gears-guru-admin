@@ -5,9 +5,9 @@ export default function Sidebar({ style }) {
   return (
     <div
       style={{
+        width: "100%",
         padding: "10px",
-        width: "40%",
-        background: "#f0f0f0",
+        background: "#F0F0F0",
         ...style,
       }}
     >

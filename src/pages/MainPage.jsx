@@ -31,24 +31,13 @@ const routes = [
 
 const MainPage = () => (
   <Router>
-    <div>
-      <MenuAppBar />
-      <div style={{ display: "flex" }}>
-        {/*<Sidebar style={{ height: "100%", width: "25%", backgroundColor: primaryColor, position: "fixed" }} />
-        <div style={{ width: "75%", padding: "10px" }}>
-          {routes.map((route, index) => (
-            // Render more <Route>s with the same paths as
-            // above, but different components this time.
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={route.main}
-            />
-          ))}
-        </div>*/}
-        <Sidebar style={{ height: "100%", width: "25%", backgroundColor: primary[500] }} />
-        <div style={{ width: "75%", height: "100%" }}>
+    <div style={{ width: "100%", height: "100%", display: "flex" }}>
+      <div style={{ display: "flex", width: "25%", height: "100%" }}>
+        <Sidebar style={{ backgroundColor: primary[500] }} />
+      </div>
+      <div style={{ width: "75%", height: "100%" }}>
+        <MenuAppBar />
+        <div style={{ height: "100%", width: "100%" }}>
           {routes.map((route, index) => (
             // Render more <Route>s with the same paths as
             // above, but different components this time.
