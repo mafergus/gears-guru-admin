@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router';
 import LoginPage from 'pages/LoginPage';
 import MainPage from 'pages/MainPage';
-import CustomersPane from 'components/CustomersPane';
 import LoadingPage from 'pages/LoadingPage';
 import { connect } from 'react-redux';
 import CssBaseline from 'material-ui/CssBaseline';

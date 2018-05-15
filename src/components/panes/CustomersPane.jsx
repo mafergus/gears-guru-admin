@@ -15,7 +15,7 @@ import Papa from 'papaparse';
 
 import { signOut, fetchCustomers, fetchGarage } from 'util/Api';
 import EnhancedTable from 'components/table/EnhancedTable';
-import store from '../store';
+import store from '../../store';
 import SimpleSnackbar from 'components/ui/SimpleSnackbar';
 import { primary } from 'util/colors';
 

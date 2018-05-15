@@ -34,7 +34,7 @@ const styles = theme => ({
   }
 });
 
-class MenuItem2 extends React.Component {
+class MenuItem extends React.Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
@@ -98,4 +98,4 @@ class MenuItem2 extends React.Component {
   }
 }
 
-export default withStyles(styles)(MenuItem2);
+export default withStyles(styles)(MenuItem);

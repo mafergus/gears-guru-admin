@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import CustomersPane from 'components/CustomersPane';
+import CustomersPane from 'components/panes/CustomersPane';
+import HomePane from 'components/panes/HomePane';
+import CampaignsPane from 'components/panes/CampaignsPane';
 import MenuAppBar from 'components/MenuAppBar';
 import Sidebar from 'components/sidebar/Sidebar';
 import { primary } from 'util/colors';
@@ -15,7 +17,7 @@ const routes = [
     path: '/',
     exact: true,
     sidebar: () => <div>home!</div>,
-    main: () => <CustomersPane />
+    main: () => <HomePane />
   },
   {
     path: '/customers',
@@ -23,9 +25,9 @@ const routes = [
     main: () => <CustomersPane />
   },
   {
-    path: '/shoelaces',
+    path: '/campaigns',
     sidebar: () => <div>shoelaces!</div>,
-    main: () => <h2>Shoelaces</h2>
+    main: () => <CampaignsPane />
   }
 ];
 
