@@ -10,10 +10,10 @@ import { ConnectedRouter } from 'react-router-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from 'material-ui/styles';
 
-import './index.css';
-import AppRoutes from './AppRoutes';
+import 'static/index.scss';
+import AppRoutes from 'components/AppRoutes';
 import store from './store';
-import App from './App';
+import App from 'components/App';
 import { primary, secondary } from 'util/colors';
 
 // Create a history of your choosing (we're using a browser history in this case)

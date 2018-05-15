@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import CustomersPane from 'components/CustomersPane';
 import MenuAppBar from 'components/MenuAppBar';
-import Sidebar from 'components/Sidebar';
+import Sidebar from 'components/sidebar/Sidebar';
 import { primary } from 'util/colors';
 
 // Each logical "route" has two components, one for
@@ -32,10 +32,10 @@ const routes = [
 const MainPage = () => (
   <Router>
     <div style={{ width: "100%", height: "100%", display: "flex" }}>
-      <div style={{ display: "flex", width: "25%", height: "100%" }}>
+      <div style={{ width: "18%", height: "100%" }}>
         <Sidebar style={{ backgroundColor: primary[500] }} />
       </div>
-      <div style={{ width: "75%", height: "100%" }}>
+      <div style={{ width: "82%", height: "100%" }}>
         <MenuAppBar />
         <div style={{ height: "100%", width: "100%" }}>
           {routes.map((route, index) => (
