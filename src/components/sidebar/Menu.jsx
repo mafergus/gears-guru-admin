@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SendIcon from '@material-ui/icons/Send';
 import HomeIcon from '@material-ui/icons/Home';
 import PeopleIcon from '@material-ui/icons/Group';
 import MessageIcon from '@material-ui/icons/Sms';
@@ -33,7 +32,7 @@ class Menu extends React.Component {
   }
 
   render() {
-    const { children, history, style } = this.props;
+    const { history, style } = this.props;
     const { selectedItem } = this.state;
 
     return (

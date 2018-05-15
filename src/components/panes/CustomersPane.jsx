@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from "react-redux";
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import grey from 'material-ui/colors/grey';
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogTitle,
-} from 'material-ui/Dialog';
+} from '@material-ui/core/Dialog';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import { CircularProgress } from 'material-ui/Progress';

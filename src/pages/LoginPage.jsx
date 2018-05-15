@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import 'pages/LoginPage.css';
 import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 import { primary, text } from 'util/colors';
-import { shadows } from 'util/shadows';
 import firebase from '../database';
 
 export default class LoginPage extends Component {

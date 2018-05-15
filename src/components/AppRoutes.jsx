@@ -4,7 +4,7 @@ import LoginPage from 'pages/LoginPage';
 import MainPage from 'pages/MainPage';
 import LoadingPage from 'pages/LoadingPage';
 import { connect } from 'react-redux';
-import CssBaseline from 'material-ui/CssBaseline';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 function mapStateToProps(state, props) {
   return {
@@ -31,7 +31,7 @@ class AppRoutes extends React.Component {
     if (hasUser) {
       Component = isAuthed ? MainPage : LoginPage;
     } else {
-      Component = LoginPage;
+      Component = LoadingPage;
     }
 
     return (

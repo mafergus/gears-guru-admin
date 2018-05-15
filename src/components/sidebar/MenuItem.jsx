@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
-import SendIcon from '@material-ui/icons/Send';
-import FileUpload from '@material-ui/icons/FileUpload';
+import Button from '@material-ui/core/Button';
 import { withStyles } from 'material-ui/styles';
 
 import { primary } from 'util/colors';

@@ -1,12 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Link } from "react-router-dom";
 
 import logo from 'assets/logo.png';
-import styles from 'static/index.scss';
 import Menu from 'components/sidebar/Menu';
 
 export default function Sidebar({ style }) {
-  const leVar = styles.primaryColor;
   return (
     <div
       style={{

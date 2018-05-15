@@ -6,7 +6,7 @@ import {
   TableRow,
   TableSortLabel,
 } from 'material-ui/Table';
-import Checkbox from 'material-ui/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
 import Tooltip from 'material-ui/Tooltip';
 
 const columnData = [

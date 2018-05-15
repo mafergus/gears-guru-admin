@@ -5,7 +5,6 @@ import 'es6-shim';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
-import { Route } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from 'material-ui/styles';
@@ -13,7 +12,6 @@ import { createMuiTheme } from 'material-ui/styles';
 import 'static/index.scss';
 import AppRoutes from 'components/AppRoutes';
 import store from './store';
-import App from 'components/App';
 import { primary, secondary } from 'util/colors';
 
 // Create a history of your choosing (we're using a browser history in this case)

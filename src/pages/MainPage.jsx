@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import CustomersPane from 'components/panes/CustomersPane';
 import HomePane from 'components/panes/HomePane';
@@ -38,7 +38,16 @@ const MainPage = () => (
         <Sidebar style={{ backgroundColor: primary[500] }} />
       </div>
       <div style={{ width: "82%", height: "100%" }}>
-        <MenuAppBar />
+        {routes.map((route, index) => (
+          // Render more <Route>s with the same paths as
+          // above, but different components this time.
+          <Route
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            component={<MenuAppBar />}
+          />
+        ))}
         <div style={{ height: "100%", width: "100%" }}>
           {routes.map((route, index) => (
             // Render more <Route>s with the same paths as

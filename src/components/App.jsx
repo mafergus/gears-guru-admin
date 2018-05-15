@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import DocumentTitle from 'react-document-title';
 
-import logo from 'assets/logo.svg';
 import { primary } from 'util/colors';
 
 class App extends Component {
