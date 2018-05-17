@@ -27,12 +27,13 @@ class AppRoutes extends React.Component {
     const hasUser = authedUser !== null;
     const isAuthed = hasUser ? authedUser.hasOwnProperty('uid') : false;
     // const isMobile = state.browser.is.extraSmall;
-    let Component = MainPage;
+    let Component = LoginPage;
     if (hasUser) {
       Component = isAuthed ? MainPage : LoginPage;
-    } else {
-      Component = LoadingPage;
-    }
+    } 
+    // else {
+    //   Component = LoadingPage;
+    // }
 
     return (
       <div style={{ height: "100%", width: "100%", position: "fixed" }}>

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Table, {
   TableBody,
   TableCell,
   TablePagination,
   TableRow,
-} from 'material-ui/Table';
-import Paper from 'material-ui/Paper';
+} from '@material-ui/core/Table';
+import Paper from '@material-ui/core/Paper';
 
 import Header from 'components/table/Header';
 import TableToolbar from 'components/table/TableToolbar';

@@ -1,31 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-};
+import { signOut } from 'util/Api';
 
-class MenuAppBar extends React.Component {
+export default class MenuAppBar extends React.Component {
 
   static propTypes = {
-    classes: PropTypes.object.isRequired,
     style: PropTypes.object,
+    title: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -49,16 +38,21 @@ class MenuAppBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleClick = () => {
+    this.handleClose();
+    signOut();
+  }
+
   render() {
-    const { classes, style } = this.props;
+    const { classes, title, style } = this.props;
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     return (
       <AppBar position="static" style={style}>
         <Toolbar>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            Title
+          <Typography variant="title" color="inherit" style={{ flex: 1 }}>
+            {title}
           </Typography>
           {auth && (
             <div>
@@ -84,8 +78,7 @@ class MenuAppBar extends React.Component {
                 open={open}
                 onClose={this.handleClose}
               >
-                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                <MenuItem onClick={this.handleClick}>Sign Out</MenuItem>
               </Menu>
             </div>
           )}
@@ -94,5 +87,3 @@ class MenuAppBar extends React.Component {
     );
   }
 }
-
-export default withStyles(styles)(MenuAppBar);

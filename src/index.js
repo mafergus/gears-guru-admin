@@ -6,8 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter } from 'react-router-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { createMuiTheme } from 'material-ui/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 import 'static/index.scss';
 import AppRoutes from 'components/AppRoutes';

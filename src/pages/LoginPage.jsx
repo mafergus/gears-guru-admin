@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import 'pages/LoginPage.css';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { primary, text } from 'util/colors';
 import firebase from '../database';
@@ -13,6 +14,7 @@ export default class LoginPage extends Component {
 
     this.state = {
       isError: false,
+      isLoading: false,
       username: '',
       password: '',
       passwordLabel: 'Password',
@@ -22,16 +24,23 @@ export default class LoginPage extends Component {
   onSubmit = () => {
     const { username, password } = this.state;
 
-    firebase.auth().signInWithEmailAndPassword(username, password)
-    .then(user => {
-      console.log("user: ", user);
-    })
-    .catch(error => {
-      // Handle Errors here.
-      // var errorCode = error.code;
-      // var errorMessage = error.message;
-      console.log("Error! ", error);
-      this.setState({ isError: true, passwordLabel: "Incorrect username or password" });
+    this.setState({ isLoading: true } ,() => {
+      firebase.auth().signInWithEmailAndPassword(username, password)
+      .then(user => {
+        console.log("user: ", user);
+        this.setState({ isLoading: false });
+      })
+      .catch(error => {
+        // Handle Errors here.
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
+        console.log("Error! ", error);
+        this.setState({ 
+          isError: true,
+          isLoading: false,
+          passwordLabel: "Incorrect username or password",
+        });
+      })
     });
   };
 
@@ -74,7 +83,7 @@ export default class LoginPage extends Component {
   }
 
   renderLoginBox() {
-    const { passwordLabel, isError } = this.state;
+    const { passwordLabel, isError, isLoading } = this.state;
 
     return (
       <div style={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -109,12 +118,14 @@ export default class LoginPage extends Component {
           />
           <br/>
           <Button
-            style={{ marginTop: 40, color: "white", backgroundColor: primary[500] }}
+            style={{ marginTop: 40, color: "white" }}
+            color="secondary"
             variant="raised"
             onClick={this.onSubmit}
+            disabled={isLoading}
             fullWidth
           >
-            Submit
+            {isLoading ? <CircularProgress style={{ color: "white" }}size={20} /> : "Submit"}
           </Button>
         </div>
       </div>

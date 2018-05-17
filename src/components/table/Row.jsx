@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TableCell, TableRow } from 'material-ui/Table';
+import { TableCell, TableRow } from '@material-ui/core/Table';
 import Checkbox from '@material-ui/core/Checkbox';
 
 export default class Row extends React.Component {

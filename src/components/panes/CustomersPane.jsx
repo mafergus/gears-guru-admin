@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from "react-redux";
 import Button from '@material-ui/core/Button';
-import grey from 'material-ui/colors/grey';
+import grey from '@material-ui/core/colors/grey';
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogTitle,
 } from '@material-ui/core/Dialog';
-import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
-import { CircularProgress } from 'material-ui/Progress';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Dropzone from 'react-dropzone';
 import Papa from 'papaparse';
 

@@ -17,17 +17,20 @@ const routes = [
     path: '/',
     exact: true,
     sidebar: () => <div>home!</div>,
-    main: () => <HomePane />
+    main: () => <HomePane />,
+    title: 'Home'
   },
   {
     path: '/customers',
     sidebar: () => <div>bubblegum!</div>,
-    main: () => <CustomersPane />
+    main: () => <CustomersPane />,
+    title: 'Customers'
   },
   {
     path: '/campaigns',
     sidebar: () => <div>shoelaces!</div>,
-    main: () => <CampaignsPane />
+    main: () => <CampaignsPane />,
+    title: 'Campaigns'
   }
 ];
 
@@ -45,7 +48,7 @@ const MainPage = () => (
             key={index}
             path={route.path}
             exact={route.exact}
-            component={<MenuAppBar />}
+            component={() => <MenuAppBar title={route.title} />}
           />
         ))}
         <div style={{ height: "100%", width: "100%" }}>

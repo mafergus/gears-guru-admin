@@ -5,9 +5,9 @@ import {
   TableHead,
   TableRow,
   TableSortLabel,
-} from 'material-ui/Table';
+} from '@material-ui/core/Table';
 import Checkbox from '@material-ui/core/Checkbox';
-import Tooltip from 'material-ui/Tooltip';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const columnData = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },

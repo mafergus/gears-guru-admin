@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import { primary } from 'util/colors';
 
@@ -69,7 +69,6 @@ class MenuItem extends React.Component {
     const { isHovered } = this.state;
     const style = this.getStyles(isSelected, isHovered);
     const theIcon = !React.isValidElement(icon) ? null : React.cloneElement(icon, { style: { color:  isSelected ? "white" : primary[50] }});
-    console.log("Item: " + index + " isSelected: " + isSelected + " isHovered: " + isHovered);
 
     return (
       <li
