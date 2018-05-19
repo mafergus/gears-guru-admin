@@ -37,12 +37,12 @@ class EnhancedTable extends React.Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    customers: PropTypes.array,
+    data: PropTypes.array,
     onSendMessageClick: PropTypes.func,
   };
 
   static defaultProps = {
-    customers: [],
+    data: [],
     onSendMessageClick: () => {},
   };
 
@@ -76,10 +76,10 @@ class EnhancedTable extends React.Component {
   };
 
   handleSelectAllClick = (event, checked) => {
-    const { customers } = this.props;
+    const { data } = this.props;
 
     if (checked) {
-      this.setState({ selected: customers.map(n => n.uid) });
+      this.setState({ selected: data.map(n => n.uid) });
       return;
     }
     this.setState({ selected: [] });
@@ -119,8 +119,8 @@ class EnhancedTable extends React.Component {
   render() {
     const { classes, onSendMessageClick } = this.props;
     const { order, orderBy, selected, rowsPerPage, page } = this.state;
-    const { customers } = this.props;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, customers.length - page * rowsPerPage);
+    const { data } = this.props;
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     return (
       <Paper className={classes.root} style={{ width: 1200 }}>
@@ -137,15 +137,15 @@ class EnhancedTable extends React.Component {
               orderBy={orderBy}
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
-              rowCount={customers.length}
+              rowCount={data.length}
             />
             <TableBody>
-              {customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
+              {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
                 const isSelected = this.isSelected(n.uid);
                 return <Row
                   key={n.uid}
                   isSelected={isSelected}
-                  customer={n}
+                  data={n}
                   onClick={this.handleClick}
                 />;
               })}
@@ -159,7 +159,7 @@ class EnhancedTable extends React.Component {
         </div>
         <TablePagination
           component="div"
-          count={customers.length}
+          count={data.length}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{

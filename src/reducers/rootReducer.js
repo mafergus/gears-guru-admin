@@ -4,9 +4,11 @@ import { routerReducer } from 'react-router-redux';
 import { authedUserReducer } from './authedUserReducer';
 import { garageReducer } from 'reducers/garageReducer';
 import { customersReducer } from 'reducers/customersReducer';
+import { campaignsReducer } from 'reducers/campaignsReducer';
 
 const appReducer = combineReducers({
   authedUser: authedUserReducer,
+  campaignsReducer: campaignsReducer,
   customers: customersReducer,
   garage: garageReducer,
   browser: responsiveStateReducer,

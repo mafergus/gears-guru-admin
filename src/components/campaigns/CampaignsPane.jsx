@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import EnhancedTable from 'components/campaigns/table/EnhancedTable';
 
@@ -9,14 +10,27 @@ const columnData = [
   { id: 'time', numeric: false, disablePadding: false, label: 'Scheduled Time' },
 ];
 
-export default class CampaignsPane extends React.Component {
-  
+function mapStateToProps(state, props) {
+  const campaigns = state.garage.campaigns ? Object.entries(state.garage.campaigns).map(entry => {
+    return { uid: entry[0], ...entry[1] }
+  }) : [];
+  return {
+    campaigns,
+  };
+}
+
+class CampaignsPane extends React.Component {
+
   render() {
+    const { campaigns } = this.props;
+    
     return (
       <div style={{ width: "100%", height: "100%", backgroundColor: "green" }}>
         <h1>Campaigns Pane</h1>
-        <EnhancedTable />
+        <EnhancedTable data={campaigns}/>
       </div>
     );
   }
 }
+
+export default connect(mapStateToProps)(CampaignsPane);

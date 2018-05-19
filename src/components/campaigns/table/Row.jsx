@@ -7,7 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 export default class Row extends React.Component {
 
   static propTypes = {
-    customer: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired,
     onClick: PropTypes.func,
     onCheckboxClick: PropTypes.func,
     isSelected: PropTypes.bool,
@@ -20,23 +20,23 @@ export default class Row extends React.Component {
   };
   
   render() {
-    const { customer, isSelected, onClick, onCheckboxClick } = this.props;
+    const { data, isSelected, onClick, onCheckboxClick } = this.props;
 
     return (
       <TableRow
         hover
-        onClick={event => onClick(event, customer.uid)}
+        onClick={event => onClick(event, data.uid)}
         aria-checked={isSelected}
         tabIndex={-1}
-        key={customer.id}
+        key={data.uid}
         selected={isSelected}
       >
         <TableCell padding="checkbox">
           <Checkbox checked={isSelected} onClick={onCheckboxClick} />
         </TableCell>
-        <TableCell padding="none">{customer.name}</TableCell>
-        <TableCell>{customer.phoneNumber}</TableCell>
-        <TableCell>{customer.car}</TableCell>
+        <TableCell padding="none">{data.name}</TableCell>
+        <TableCell>{data.message}</TableCell>
+        <TableCell>{data.status}</TableCell>
       </TableRow>
     );
   }
