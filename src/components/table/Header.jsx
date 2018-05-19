@@ -7,15 +7,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import Tooltip from '@material-ui/core/Tooltip';
 
-const columnData = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-  { id: 'number', numeric: false, disablePadding: false, label: 'Phone Number' },
-  { id: 'car', numeric: false, disablePadding: false, label: 'Car' },
-];
-
 export default class Header extends React.Component {
 
   static propTypes = {
+    columnData: PropTypes.array.isRequired,
     numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
     onSelectAllClick: PropTypes.func.isRequired,
@@ -29,7 +24,14 @@ export default class Header extends React.Component {
   };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
+    const {
+      columnData,
+      onSelectAllClick,
+      order,
+      orderBy,
+      numSelected,
+      rowCount,
+    } = this.props;
 
     return (
       <TableHead>

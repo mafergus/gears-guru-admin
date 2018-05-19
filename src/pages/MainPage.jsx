@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import CustomersPane from 'components/panes/CustomersPane';
 import HomePane from 'components/panes/HomePane';
-import CampaignsPane from 'components/panes/CampaignsPane';
+import CampaignsPane from 'components/campaigns/CampaignsPane';
 import MenuAppBar from 'components/MenuAppBar';
 import Sidebar from 'components/sidebar/Sidebar';
 import { primary } from 'util/colors';

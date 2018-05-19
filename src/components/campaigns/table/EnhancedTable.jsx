@@ -11,12 +11,13 @@ import Paper from '@material-ui/core/Paper';
 
 import Header from 'components/table/Header';
 import TableToolbar from 'components/table/TableToolbar';
-import Row from 'components/table/Row';
+import Row from 'components/campaigns/table/Row';
 
 const columnData = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-  { id: 'number', numeric: false, disablePadding: false, label: 'Phone Number' },
-  { id: 'car', numeric: false, disablePadding: false, label: 'Car' },
+  { id: 'message', numeric: false, disablePadding: false, label: 'Message' },
+  { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
+  { id: 'time', numeric: false, disablePadding: false, label: 'Scheduled Time' },
 ];
 
 const styles = theme => ({
@@ -36,11 +37,12 @@ class EnhancedTable extends React.Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    customers: PropTypes.array.isRequired,
+    customers: PropTypes.array,
     onSendMessageClick: PropTypes.func,
   };
 
   static defaultProps = {
+    customers: [],
     onSendMessageClick: () => {},
   };
 
