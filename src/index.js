@@ -11,7 +11,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 import 'static/index.scss';
 import AppRoutes from 'components/AppRoutes';
-import store from './store';
+import store from 'datastore/store';
 import { primary, secondary } from 'util/colors';
 
 // Create a history of your choosing (we're using a browser history in this case)

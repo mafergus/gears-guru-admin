@@ -5,7 +5,9 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { primary, text } from 'util/colors';
-import firebase from '../database';
+import firebase from 'datastore/database';
+import { fetchGarage } from 'util/Api';
+import store from 'datastore/store';
 
 export default class LoginPage extends Component {
 
@@ -29,6 +31,10 @@ export default class LoginPage extends Component {
       .then(user => {
         console.log("user: ", user);
         this.setState({ isLoading: false });
+        fetchGarage(user.uid)
+        .then(garage => {
+          store.dispatch({ type: "ADD_GARAGE_SUCCESS", garage });
+        });
       })
       .catch(error => {
         // Handle Errors here.

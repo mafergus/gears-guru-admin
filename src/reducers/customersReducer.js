@@ -1,4 +1,4 @@
-export function customersReducer(state = {}, action) {
+export function customersReducer(state = [], action) {
   switch (action.type) {
     case "ADD_CUSTOMER":
       let newState = { ...state };

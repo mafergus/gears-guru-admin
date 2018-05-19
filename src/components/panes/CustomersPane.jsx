@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from "react-redux";
 import Button from '@material-ui/core/Button';
 import grey from '@material-ui/core/colors/grey';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from '@material-ui/core/Dialog';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -15,18 +14,28 @@ import Papa from 'papaparse';
 
 import { signOut, fetchCustomers, fetchGarage } from 'util/Api';
 import EnhancedTable from 'components/table/EnhancedTable';
-import store from '../../store';
+import store from 'datastore/store';
 import SimpleSnackbar from 'components/ui/SimpleSnackbar';
 import { primary } from 'util/colors';
 
 function mapStateToProps(state, props) {
   return {
     garageId: state.authedUser.uid,
-    customers: Object.values(state.customers),
+    customers: Object.values(state.customers) || {},
   };
 }
 
 class CustomersPane extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      open: false,
+      isLoading: false,
+      message: "",
+      snackbarMessage: "",
+    };
+  }
 
   componentDidMount() {
     const { garageId } = this.props;
@@ -39,12 +48,6 @@ class CustomersPane extends React.Component {
     });
     fetchCustomers(garageId);
   }
-
-  state = {
-    open: false,
-    isLoading: false,
-    snackbarMessage: "",
-  };
 
   handleClickOpen = (event, selected) => {
       this.setState({ open: true, selected });
@@ -156,7 +159,7 @@ class CustomersPane extends React.Component {
         </Button>
         {
           customers.length === 0 ?
-          <Paper style={{ width: "70%", height: "70%" }}>
+          <Paper style={{ width: "85%", height: "85%" }}>
             <Dropzone
               style={{ width: "95%", height: "95%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
               accept="text/csv"

@@ -1,5 +1,5 @@
-import firebase from '../database';
-import store from '../store';
+import firebase from 'datastore/database';
+import store from 'datastore/store';
 
 export function signOut() {
   firebase.auth().signOut()
@@ -33,10 +33,12 @@ export function fetchCustomers(garageId) {
       firebase.database().ref('customers/' + key).once('value')
       .then(snapshot => {
         if (snapshot.exists()) {
+          console.log("Got key: ", key);
+          console.log("Got customer: ", snapshot.val());
           store.dispatch({ type: "ADD_CUSTOMER", customer: snapshot.val(), id: key });
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log("Error adding customer: ", error));
     });
   })
   .catch(error => {

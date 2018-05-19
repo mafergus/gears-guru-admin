@@ -8,6 +8,14 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import { connect } from 'react-redux';
+
+import { fetchGarage } from 'util/Api';
+import store from 'datastore/store';
+import firebase from 'datastore/database';
 
 const styles = theme => ({
   root: {
@@ -22,6 +30,20 @@ const styles = theme => ({
   },
 });
 
+function mapStateToProps(state, props) { 
+  return {
+    authedUser: state.authedUser || {},
+    name: state.garage.name || "",
+    email: state.garage.email || "",
+    contactNumber: state.garage.contactNumber || "",
+    website: state.garage.website || "",
+    facebook: state.garage.facebook || "",
+    address: state.garage.address || "",
+    neighborhood: state.garage.neighborhood || "",
+    emirate: state.garage.emirate || 1,
+  };
+}
+
 class HomePane extends React.Component {
 
   static propTypes = {
@@ -33,26 +55,67 @@ class HomePane extends React.Component {
 
     this.state = {
       isLoading: false,
-      name: '',
-      email: '',
-      contactNumber: '',
-      website: '',
-      facebook: '',
-      address: '',
-      neighborhood: '',
-      emirate: '',
       value: 0,
     };
   }
 
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
+  componentDidMount() {
+    const { authedUser } = this.props;
+    firebase.database().ref('garages/' + authedUser.uid)
+    .on('value', snapshot => {
+      if (snapshot.exists()) {
+        this.populateState(snapshot.val());
+      }
+    });
+  }
+
+  populateState(garage) {
+    this.setState({
+      name: garage.name,
+    });
+  }
+
+  componentWillUpdate() {
+    const { authedUser } = this.props;
+    if (authedUser) {
+      fetchGarage(authedUser.uid)
+      .then(garage => {
+        store.dispatch({ type: "ADD_GARAGE_SUCCESS", garage });
+      });
+    }
+  }
+
+  handleChange = (event, value) => this.setState({ value });;
+
+  handleChangeEmirate = (event) => {
+    this.updateData("emirate", event.target.value);
+  }
+
+  updateData = (propId, val) => {
+    const { authedUser } = this.props;
+    const newState = {};
+
+    newState[propId] = val;
+    this.setState(newState, () => {
+      firebase.database().ref('garages/' + authedUser.uid).update(newState);
+    });
+  }
+
+  renderTextField(text, value, propName) {
+    const { classes } = this.props;
+
+    return <TextField
+      className={classes.textField}
+      style={{ width: "100%" }}
+      label={text}
+      onChange={(event, value) => this.updateData(propName, event.target.value)}
+      value={value}
+    />;
+  }
 
   renderHome() {
-    const { classes } = this.props;
     const { 
-      isLoading,
+      classes,
       name,
       email,
       contactNumber,
@@ -60,71 +123,36 @@ class HomePane extends React.Component {
       facebook,
       address,
       neighborhood,
-      emirate 
-    } = this.state;
+      emirate,
+    } = this.props;
+    const { isLoading } = this.state;
 
     return (
       <div style={{ height: "100%", width: "100%", padding: 42 }}>
       <Grid container spacing={24}>
-        <Grid item lg={5}>
-          <TextField
-            className={classes.textField}
-            style={{ width: 250 }}
-            placeholder="Garage Name"
-            label="Garage Name"
-            onChange={(event, value) => this.setState({ name: event.target.value }) }
-            value={name}
-          />
-        </Grid>
-        <Grid item lg={5}>
-          <TextField
-            className={classes.textField}
-            style={{ width: 250 }}
-            placeholder="Email"
-            label="Email"
-            onChange={(event, value) => this.setState({ email: event.target.value }) }
-            value={email}
-          />
-        </Grid>
-        <Grid item lg={5}>
-          <TextField
-            className={classes.textField}
-            style={{ width: 250 }}
-            placeholder="Contact Number"
-            label="Contact Number"
-            onChange={(event, value) => this.setState({ contactNumber: event.target.value }) }
-            value={contactNumber}
-          />
-        </Grid>
-        <Grid item lg={5}>
-          <TextField
-            className={classes.textField}
-            style={{ width: 250 }}
-            placeholder="Website"
-            label="Website"
-            onChange={(event, value) => this.setState({ website: event.target.value }) }
-            value={website}
-          />
-        </Grid>
-        <Grid item lg={5}>
-          <TextField
-            className={classes.textField}
-            style={{ width: 250 }}
-            placeholder="Facebook"
-            label="Facebook"
-            onChange={(event, value) => this.setState({ facebook: event.target.value }) }
-            value={facebook}
-          />
-        </Grid>
-        <Grid item lg={5}>
-          <TextField
-            className={classes.textField}
-            style={{ width: 250 }}
-            placeholder="Address"
-            label="Address"
-            onChange={(event, value) => this.setState({ address: event.target.value }) }
-            value={address}
-          />
+        <Grid item lg={3}>{this.renderTextField("Garage Name", name, "name")}</Grid>
+        <Grid item lg={3}>{this.renderTextField("Email", email, "email")}</Grid>
+        <Grid item lg={3}>{this.renderTextField("Contact Number", contactNumber, "contactNumber")}</Grid>
+        <Grid item lg={3}>{this.renderTextField("Website", website, "website")}</Grid>
+        <Grid item lg={3}>{this.renderTextField("Facebook", facebook, "facebook")}</Grid>
+        <Grid item lg={3}>{this.renderTextField("Address", address, "address")}</Grid>
+        <Grid item lg={3} style={{ display: "flex" }}>
+          <InputLabel htmlFor="age-simple" style={{ flexGrow: 1 }}>Emirate</InputLabel>
+          <Select
+            value={emirate}
+            onChange={this.handleChangeEmirate}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={1}>Abu Dhabi</MenuItem>
+            <MenuItem value={2}>Ajman</MenuItem>
+            <MenuItem value={3}>Dubai</MenuItem>
+            <MenuItem value={4}>Fujairah</MenuItem>
+            <MenuItem value={5}>Ras Al Khaimah</MenuItem>
+            <MenuItem value={6}>Sharjah</MenuItem>
+            <MenuItem value={7}>Umm Al Quwain</MenuItem>
+          </Select>
         </Grid>
         <Grid item lg={10}>
           <Button
@@ -145,6 +173,7 @@ class HomePane extends React.Component {
   
   render() {
     const { value } = this.state;
+    const { authedUser } = this.props;
 
     return (
       <Paper style={{ height: "inherit", width: "inherit" }}>
@@ -166,4 +195,4 @@ class HomePane extends React.Component {
   }
 }
 
-export default withStyles(styles)(HomePane);
+export default connect(mapStateToProps)(withStyles(styles)(HomePane));

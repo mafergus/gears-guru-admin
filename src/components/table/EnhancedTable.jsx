@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Table, {
-  TableBody,
-  TableCell,
-  TablePagination,
-  TableRow,
-} from '@material-ui/core/Table';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
 
 import Header from 'components/table/Header';
@@ -113,6 +113,7 @@ class EnhancedTable extends React.Component {
     const { order, orderBy, selected, rowsPerPage, page } = this.state;
     const { customers } = this.props;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, customers.length - page * rowsPerPage);
+    debugger;
 
     return (
       <Paper className={classes.root} style={{ width: 1200 }}>

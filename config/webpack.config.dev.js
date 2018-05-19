@@ -85,6 +85,7 @@ module.exports = {
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
       'assets': path.resolve('src/assets'),
+      'datastore': path.resolve('src/datastore'),
       'pages': path.resolve('src/pages'),
       'reducers': path.resolve('src/reducers'),
       'components': path.resolve('src/components'),

@@ -1,5 +1,6 @@
 import firebase from 'firebase';
-import store from "./store";
+import store from "datastore/store";
+import { fetchGarage } from 'util/Api';
 
 const config = {
   apiKey: "AIzaSyCV6gIStVUYNGcsJIO4rH2uqz5_q32mCR8",
@@ -23,6 +24,8 @@ firebase.auth().onAuthStateChanged(user => {
       creationTime: user.metadata.creationTime,
     };
     store.dispatch({ type: "ADD_AUTHED_USER_SUCCESS", user: authedUser });
+    fetchGarage(user.uid)
+    .then(garage => store.dispatch({ type: "ADD_GARAGE_SUCCESS", garage }));
   } else {
     // No user is signed in.
   }
