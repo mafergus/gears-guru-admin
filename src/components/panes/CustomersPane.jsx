@@ -144,36 +144,38 @@ class CustomersPane extends React.Component {
   }
 
   render() {
-    const { customers } = this.props;
+    // const { customers } = this.props;
+    const customers = [];
     const { snackbarText, snackbarOpen } = this.state;
 
     return (
-      <div style={{ height: "100%", width: "100%", backgroundColor: grey[100], display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <Button
-          variant="raised"
-          label="Sign Out"
-          onClick={this.signOut}
-          style={{ position: "fixed", right: 5, top: 5, color: "black", backgroundColor: "white" }}
-        >
-          Sign Out
-        </Button>
+      <div style={{ 
+          height: "inherit",
+          width: "inherit",
+          backgroundColor: grey[100],
+        }}
+      >
         {
           customers.length === 0 ?
-          <Paper style={{ width: "85%", height: "85%" }}>
-            <Dropzone
-              style={{ width: "95%", height: "95%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
-              accept="text/csv"
-              onDrop={this.onDrop}
-            >
-              <p>Drag and drop a CSV file to get started or</p>
-              <Button label="Upload" variant="raised" style={{ marginTop: 50, color: "white", backgroundColor: primary[500] }}>
-                Upload
-              </Button>
-            </Dropzone>
-          </Paper> :
+          <div style={{ height: "100%", width: "100%" }} className="centered-container">
+            <Paper style={{ width: "85%", height: "75%" }}>
+              <Dropzone
+                style={{ width: "95%", height: "95%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+                accept="text/csv"
+                onDrop={this.onDrop}
+              >
+                <p>Drag and drop a CSV file to get started or</p>
+                <Button label="Upload" variant="raised" style={{ marginTop: 50, color: "white", backgroundColor: primary[500] }}>
+                  Upload
+                </Button>
+              </Dropzone>
+            </Paper>
+          </div>
+           :
           <EnhancedTable
             customers={customers}
             onSendMessageClick={this.handleClickOpen}
+            style={{ height: "100%" }}
           />
         }
         <SimpleSnackbar

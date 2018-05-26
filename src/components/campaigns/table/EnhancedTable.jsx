@@ -23,7 +23,6 @@ const columnData = [
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
   },
   table: {
     minWidth: 1020,
@@ -39,11 +38,13 @@ class EnhancedTable extends React.Component {
     classes: PropTypes.object.isRequired,
     data: PropTypes.array,
     onSendMessageClick: PropTypes.func,
+    style: PropTypes.object,
   };
 
   static defaultProps = {
     data: [],
     onSendMessageClick: () => {},
+    style: {},
   };
 
 // data: [].sort((a, b) => (a.name < b.name ? -1 : 1)),
@@ -117,13 +118,13 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    const { classes, onSendMessageClick } = this.props;
+    const { classes, onSendMessageClick, style } = this.props;
     const { order, orderBy, selected, rowsPerPage, page } = this.state;
     const { data } = this.props;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     return (
-      <Paper className={classes.root} style={{ width: 1200 }}>
+      <Paper className={classes.root} style={{ width: "100%", ...style }}>
         <TableToolbar
           onSendMessageClick={event => onSendMessageClick(event, selected)}
           numSelected={selected.length}

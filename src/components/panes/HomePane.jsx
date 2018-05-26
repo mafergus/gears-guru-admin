@@ -11,6 +11,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 import { connect } from 'react-redux';
 
 import { fetchGarage } from 'util/Api';
@@ -26,8 +27,9 @@ const styles = theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
-  textField: {
-  },
+  gridContainer: {
+    marginTop: 5,
+  }
 });
 
 function mapStateToProps(state, props) { 
@@ -40,7 +42,7 @@ function mapStateToProps(state, props) {
     facebook: state.garage.facebook || "",
     address: state.garage.address || "",
     neighborhood: state.garage.neighborhood || "",
-    emirate: state.garage.emirate || 1,
+    emirate: isNaN(state.garage.emirate) ? 1 : state.garage.emirate,
   };
 }
 
@@ -104,13 +106,17 @@ class HomePane extends React.Component {
   renderTextField(text, value, propName) {
     const { classes } = this.props;
 
-    return <TextField
-      className={classes.textField}
-      style={{ width: "100%" }}
-      label={text}
-      onChange={(event, value) => this.updateData(propName, event.target.value)}
-      value={value}
-    />;
+    return (
+      <Grid item md={4} style={{ padding: 20 }}>
+        <TextField
+          className={classes.textField}
+          style={{ width: "100%" }}
+          label={text}
+          onChange={(event, value) => this.updateData(propName, event.target.value)}
+          value={value}
+        />
+      </Grid>
+    );
   }
 
   renderHome() {
@@ -129,44 +135,56 @@ class HomePane extends React.Component {
 
     return (
       <div style={{ height: "100%", width: "100%", padding: 42 }}>
-      <Grid container spacing={24}>
-        <Grid item lg={3}>{this.renderTextField("Garage Name", name, "name")}</Grid>
-        <Grid item lg={3}>{this.renderTextField("Email", email, "email")}</Grid>
-        <Grid item lg={3}>{this.renderTextField("Contact Number", contactNumber, "contactNumber")}</Grid>
-        <Grid item lg={3}>{this.renderTextField("Website", website, "website")}</Grid>
-        <Grid item lg={3}>{this.renderTextField("Facebook", facebook, "facebook")}</Grid>
-        <Grid item lg={3}>{this.renderTextField("Address", address, "address")}</Grid>
-        <Grid item lg={3} style={{ display: "flex" }}>
-          <InputLabel htmlFor="age-simple" style={{ flexGrow: 1 }}>Emirate</InputLabel>
-          <Select
-            value={emirate}
-            onChange={this.handleChangeEmirate}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={1}>Abu Dhabi</MenuItem>
-            <MenuItem value={2}>Ajman</MenuItem>
-            <MenuItem value={3}>Dubai</MenuItem>
-            <MenuItem value={4}>Fujairah</MenuItem>
-            <MenuItem value={5}>Ras Al Khaimah</MenuItem>
-            <MenuItem value={6}>Sharjah</MenuItem>
-            <MenuItem value={7}>Umm Al Quwain</MenuItem>
-          </Select>
+        <Grid container spacing={24} className={classes.gridContainer}>
+          {this.renderTextField("Garage Name", name, "name")}
+          {this.renderTextField("Email", email, "email")}
         </Grid>
-        <Grid item lg={10}>
-          <Button
-            style={{ marginTop: 40, color: "white" }}
-            color="secondary"
-            variant="raised"
-            onClick={this.onSubmit}
-            disabled={isLoading}
-            fullWidth
-          >
-            {isLoading ? <CircularProgress style={{ color: "white" }}size={20} /> : "Submit"}
-          </Button>
+        <Grid container spacing={24} className={classes.gridContainer}>
+          {this.renderTextField("Contact Number", contactNumber, "contactNumber")}
+          {this.renderTextField("Website", website, "website")}
         </Grid>
-      </Grid>
+        <Grid container spacing={24} className={classes.gridContainer}>
+          {this.renderTextField("Facebook", facebook, "facebook")}
+          {this.renderTextField("Address", address, "address")}
+        </Grid>
+        <Grid container spacing={24} className={classes.gridContainer}>
+          <Grid item sm={4} style={{ display: "flex", padding: 20 }}>
+            <FormControl style={{ width: "100%" }}>
+              <InputLabel htmlFor="emirate">Emirate</InputLabel>
+              <Select
+                value={emirate === 0 ? "" : emirate}
+                onChange={this.handleChangeEmirate}
+                inputProps={{
+                  name: 'emirate',
+                  id: 'emirate',
+                }}
+              >
+                <MenuItem value={0}><em>None</em></MenuItem>
+                <MenuItem value={1}>Abu Dhabi</MenuItem>
+                <MenuItem value={2}>Ajman</MenuItem>
+                <MenuItem value={3}>Dubai</MenuItem>
+                <MenuItem value={4}>Fujairah</MenuItem>
+                <MenuItem value={5}>Ras Al Khaimah</MenuItem>
+                <MenuItem value={6}>Sharjah</MenuItem>
+                <MenuItem value={7}>Umm Al Quwain</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+        <Grid container spacing={24} className={classes.gridContainer}>
+          <Grid item sm={8} style={{ padding: 20 }}>
+            <Button
+              style={{ marginTop: 40, color: "white" }}
+              color="secondary"
+              variant="raised"
+              onClick={this.onSubmit}
+              disabled={isLoading}
+              fullWidth
+            >
+              {isLoading ? <CircularProgress style={{ color: "white" }}size={20} /> : "Submit"}
+            </Button>
+          </Grid>
+        </Grid>
       </div>
     );
   }

@@ -25,9 +25,11 @@ class CampaignsPane extends React.Component {
     const { campaigns } = this.props;
     
     return (
-      <div style={{ width: "100%", height: "100%", backgroundColor: "green" }}>
-        <h1>Campaigns Pane</h1>
-        <EnhancedTable data={campaigns}/>
+      <div style={{ width: "inherit", height: "inherit" }}>
+        <EnhancedTable
+          data={campaigns}
+          style={{ height: "100%"}}
+        />
       </div>
     );
   }

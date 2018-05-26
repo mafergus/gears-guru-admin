@@ -34,6 +34,7 @@ const theme = createMuiTheme({
       dark: secondary[700],
       contrastText: '#000',
     },
+    accent1color: "red",
   },
 });
 
