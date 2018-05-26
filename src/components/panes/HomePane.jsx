@@ -56,6 +56,14 @@ class HomePane extends React.Component {
     super();
 
     this.state = {
+      name: '',
+      email: '',
+      contactNumber: '',
+      website: '',
+      facebook: '',
+      address: '',
+      neighborhood: '',
+      emirate: '',
       isLoading: false,
       value: 0,
     };
@@ -74,6 +82,13 @@ class HomePane extends React.Component {
   populateState(garage) {
     this.setState({
       name: garage.name,
+      email: garage.email,
+      contactNumber: garage.contactNumber,
+      website: garage.website,
+      facebook: garage.facebook,
+      address: garage.address,
+      neighborhood: garage.neighborhood,
+      emirate: garage.emirate,
     });
   }
 
@@ -120,8 +135,8 @@ class HomePane extends React.Component {
   }
 
   renderHome() {
-    const { 
-      classes,
+    const {
+      isLoading,
       name,
       email,
       contactNumber,
@@ -130,8 +145,8 @@ class HomePane extends React.Component {
       address,
       neighborhood,
       emirate,
-    } = this.props;
-    const { isLoading } = this.state;
+    } = this.state;
+    const { classes } = this.props;
 
     return (
       <div style={{ height: "100%", width: "100%", padding: 42 }}>
