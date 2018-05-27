@@ -11,21 +11,11 @@ import Paper from '@material-ui/core/Paper';
 
 import Header from 'components/table/Header';
 import TableToolbar from 'components/table/TableToolbar';
-import Row from 'components/table/Row';
-
-const columnData = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-  { id: 'number', numeric: false, disablePadding: false, label: 'Phone Number' },
-  { id: 'car', numeric: false, disablePadding: false, label: 'Car' },
-];
+import CustomerRow from 'components/table/CustomerRow';
 
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
-  },
-  table: {
-    minWidth: 1020,
   },
   tableWrapper: {
     overflowX: 'auto',
@@ -36,12 +26,17 @@ class EnhancedTable extends React.Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    customers: PropTypes.array.isRequired,
+    columnData: PropTypes.array.isRequired,
+    data: PropTypes.array,
     onSendMessageClick: PropTypes.func,
+    style: PropTypes.object,
+    row: PropTypes.element.isRequired,
   };
 
   static defaultProps = {
+    data: [],
     onSendMessageClick: () => {},
+    style: {},
   };
 
 // data: [].sort((a, b) => (a.name < b.name ? -1 : 1)),
@@ -74,10 +69,10 @@ class EnhancedTable extends React.Component {
   };
 
   handleSelectAllClick = (event, checked) => {
-    const { customers } = this.props;
+    const { data } = this.props;
 
     if (checked) {
-      this.setState({ selected: customers.map(n => n.uid) });
+      this.setState({ selected: data.map(n => n.uid) });
       return;
     }
     this.setState({ selected: [] });
@@ -115,13 +110,13 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    const { classes, onSendMessageClick } = this.props;
+    const { classes, data, columnData, onSendMessageClick, style, row } = this.props;
     const { order, orderBy, selected, rowsPerPage, page } = this.state;
-    const { customers } = this.props;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, customers.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    const Row = this.props.row;
 
     return (
-      <Paper className={classes.root} style={{ width: 1200 }}>
+      <Paper className={classes.root} style={{ width: "100%", ...style }}>
         <TableToolbar
           onSendMessageClick={event => onSendMessageClick(event, selected)}
           numSelected={selected.length}
@@ -135,15 +130,15 @@ class EnhancedTable extends React.Component {
               orderBy={orderBy}
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
-              rowCount={customers.length}
+              rowCount={data.length}
             />
             <TableBody>
-              {customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
+              {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
                 const isSelected = this.isSelected(n.uid);
                 return <Row
                   key={n.uid}
                   isSelected={isSelected}
-                  customer={n}
+                  data={n}
                   onClick={this.handleClick}
                 />;
               })}
@@ -157,7 +152,7 @@ class EnhancedTable extends React.Component {
         </div>
         <TablePagination
           component="div"
-          count={customers.length}
+          count={data.length}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{

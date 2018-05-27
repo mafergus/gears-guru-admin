@@ -14,9 +14,18 @@ import Papa from 'papaparse';
 
 import { signOut, fetchCustomers, fetchGarage } from 'util/Api';
 import EnhancedTable from 'components/table/EnhancedTable';
+import CustomerRow from 'components/table/CustomerRow';
 import store from 'datastore/store';
 import SimpleSnackbar from 'components/ui/SimpleSnackbar';
 import { primary } from 'util/colors';
+
+const columnData = [
+  { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
+  { id: 'number', numeric: false, disablePadding: false, label: 'Phone Number' },
+  { id: 'carMake', numeric: false, disablePadding: false, label: 'Make' },
+  { id: 'carModel', numeric: false, disablePadding: false, label: 'Model' },
+  { id: 'carYear', numeric: false, disablePadding: false, label: 'Year' },
+];
 
 function mapStateToProps(state, props) {
   return {
@@ -150,9 +159,10 @@ class CustomersPane extends React.Component {
 
     return (
       <div style={{ 
-          height: "inherit",
-          width: "inherit",
+          height: "100%",
+          width: "100%",
           backgroundColor: grey[100],
+          padding: 30,
         }}
       >
         {
@@ -173,9 +183,10 @@ class CustomersPane extends React.Component {
           </div>
            :
           <EnhancedTable
-            customers={customers}
+            columnData={columnData}
+            data={customers}
             onSendMessageClick={this.handleClickOpen}
-            style={{ height: "100%" }}
+            row={CustomerRow}
           />
         }
         <SimpleSnackbar

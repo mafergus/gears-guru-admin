@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import EnhancedTable from 'components/campaigns/table/EnhancedTable';
+import EnhancedTable from 'components/table/EnhancedTable';
+import CampaignRow from 'components/table/CampaignRow';
 
 const columnData = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
@@ -25,10 +26,11 @@ class CampaignsPane extends React.Component {
     const { campaigns } = this.props;
     
     return (
-      <div style={{ width: "inherit", height: "inherit" }}>
+      <div style={{ width: "100%", height: "100%", padding: 30 }}>
         <EnhancedTable
+          columnData={columnData}
           data={campaigns}
-          style={{ height: "100%"}}
+          row={CampaignRow}
         />
       </div>
     );

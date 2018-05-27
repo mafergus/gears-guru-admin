@@ -4,7 +4,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default class Row extends React.Component {
+export default class CampaignRow extends React.Component {
 
   static propTypes = {
     data: PropTypes.object.isRequired,

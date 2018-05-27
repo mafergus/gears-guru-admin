@@ -206,7 +206,7 @@ class HomePane extends React.Component {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container spacing={24} className={classes.gridContainer}>
+        <Grid container spacing={24} className={classes.gridContainer} style={{ display: "none" }}>
           <Grid item sm={8} style={{ padding: 20 }}>
             <Button
               style={{ marginTop: 40, color: "white" }}

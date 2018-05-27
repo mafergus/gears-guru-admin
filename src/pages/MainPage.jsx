@@ -51,18 +51,16 @@ const MainPage = () => (
             component={() => <MenuAppBar title={route.title} />}
           />
         ))}
-        <div style={{ height: "100%", width: "100%" }}>
-          {routes.map((route, index) => (
-            // Render more <Route>s with the same paths as
-            // above, but different components this time.
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={route.main}
-            />
-          ))}
-        </div>
+        {routes.map((route, index) => (
+          // Render more <Route>s with the same paths as
+          // above, but different components this time.
+          <Route
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            component={route.main}
+          />
+        ))}
       </div>
     </div>
   </Router>
