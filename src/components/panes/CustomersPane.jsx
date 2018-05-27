@@ -144,8 +144,8 @@ class CustomersPane extends React.Component {
   }
 
   render() {
-    // const { customers } = this.props;
-    const customers = [];
+    const { customers } = this.props;
+    // const customers = [];
     const { snackbarText, snackbarOpen } = this.state;
 
     return (

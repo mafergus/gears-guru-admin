@@ -11,12 +11,21 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Email from '@material-ui/icons/Email';
+import Call from '@material-ui/icons/Call';
+import Web from '@material-ui/icons/Web';
+import Face from '@material-ui/icons/Face';
+import Home from '@material-ui/icons/Home';
+import LocationOn from '@material-ui/icons/LocationOn';
 import { connect } from 'react-redux';
 
 import { fetchGarage } from 'util/Api';
 import store from 'datastore/store';
 import firebase from 'datastore/database';
+import { secondary } from 'util/colors';
 
 const styles = theme => ({
   root: {
@@ -63,7 +72,7 @@ class HomePane extends React.Component {
       facebook: '',
       address: '',
       neighborhood: '',
-      emirate: '',
+      emirate: 3,
       isLoading: false,
       value: 0,
     };
@@ -118,17 +127,24 @@ class HomePane extends React.Component {
     });
   }
 
-  renderTextField(text, value, propName) {
+  renderTextField(text, value, propName, icon) {
     const { classes } = this.props;
 
     return (
       <Grid item md={4} style={{ padding: 20 }}>
         <TextField
           className={classes.textField}
-          style={{ width: "100%" }}
+          style={{ width: "100%", marginRight: 90 }}
           label={text}
           onChange={(event, value) => this.updateData(propName, event.target.value)}
           value={value}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                {icon}
+              </InputAdornment>
+            ),
+          }}
         />
       </Grid>
     );
@@ -151,30 +167,34 @@ class HomePane extends React.Component {
     return (
       <div style={{ height: "100%", width: "100%", padding: 42 }}>
         <Grid container spacing={24} className={classes.gridContainer}>
-          {this.renderTextField("Garage Name", name, "name")}
-          {this.renderTextField("Email", email, "email")}
+          {this.renderTextField("Garage Name", name, "name", <AccountCircle style={{ color: secondary[500] }}/>)}
+          {this.renderTextField("Email", email, "email", <Email style={{ color: secondary[500] }}/>)}
         </Grid>
         <Grid container spacing={24} className={classes.gridContainer}>
-          {this.renderTextField("Contact Number", contactNumber, "contactNumber")}
-          {this.renderTextField("Website", website, "website")}
+          {this.renderTextField("Contact Number", contactNumber, "contactNumber", <Call style={{ color: secondary[500] }}/>)}
+          {this.renderTextField("Website", website, "website", <Web style={{ color: secondary[500] }}/>)}
         </Grid>
         <Grid container spacing={24} className={classes.gridContainer}>
-          {this.renderTextField("Facebook", facebook, "facebook")}
-          {this.renderTextField("Address", address, "address")}
+          {this.renderTextField("Facebook", facebook, "facebook", <Face style={{ color: secondary[500] }}/>)}
+          {this.renderTextField("Address", address, "address", <Home style={{ color: secondary[500] }}/>)}
         </Grid>
         <Grid container spacing={24} className={classes.gridContainer}>
           <Grid item sm={4} style={{ display: "flex", padding: 20 }}>
             <FormControl style={{ width: "100%" }}>
               <InputLabel htmlFor="emirate">Emirate</InputLabel>
               <Select
-                value={emirate === 0 ? "" : emirate}
+                value={emirate}
                 onChange={this.handleChangeEmirate}
                 inputProps={{
                   name: 'emirate',
                   id: 'emirate',
                 }}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <LocationOn style={{ color: secondary[500] }}/>
+                  </InputAdornment>
+                }
               >
-                <MenuItem value={0}><em>None</em></MenuItem>
                 <MenuItem value={1}>Abu Dhabi</MenuItem>
                 <MenuItem value={2}>Ajman</MenuItem>
                 <MenuItem value={3}>Dubai</MenuItem>
